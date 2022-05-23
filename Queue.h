@@ -5,73 +5,95 @@
 #ifndef EX3_QUEUE_H
 #define EX3_QUEUE_H
 #include "Node.h"
+
 template <class T>
 class Queue
 {
-private:
-    Node<T>* first;
-    Node<T>* last;
-    int count;
-public:
-    Queue(void)
-    {
-        first = NULL;
-        last = NULL;
-        count = 0;
-    }
 
-    ~Queue(void)
+public:
+    Queue():
+            m_first(nullptr),
+            m_last(nullptr),
+            m_counter(0)
+    {}
+
+    ~Queue()
     {
         while(!isEmpty())
-            Dequeue();
+            popFront();
     }
 
-    void Enqueue(T element)
+    void pushBack(T element)
     {
         Node<T>* tmp = new Node<T>();
         tmp->setData(element);
-        tmp->setNext(NULL);
+        tmp->setNext(nullptr);
 
         if (isEmpty()) {
-            first = last = tmp;
+            m_first = m_last = tmp;
         }
         else {
-            last->setNext(tmp);
-            last = tmp;
+            m_last->setNext(tmp);
+            m_last = tmp;
         }
-        count++;
+        m_counter++;
     }
 
-    T Dequeue(void)
+    T front()
     {
-        if ( isEmpty() )
-            cout << "Queue is empty" << endl;
-        T ret = first->getData();
-        Node<T>* tmp = first;
-        first = first->getNext();
-        count--;
+        if (isEmpty()) {
+            throw EmptyQueue();
+        }
+        return m_first->getData();
+    }
+
+
+    void popFront()
+    {
+        if ( isEmpty() ){
+            throw EmptyQueue();
+        }
+        Node<T>* tmp = m_first;
+        m_first = m_first->getNext();
+        m_counter--;
         delete tmp;
-        return ret;
     }
 
-    T First(void)
+
+    int Size()
     {
-        if (isEmpty())
-            cout << "Queue is empty" << endl;
-        return first->getData();
+        return m_counter;
     }
 
-    int Size(void)
+    bool isEmpty()
     {
-        return count;
+        return m_counter == 0;
     }
 
-    bool isEmpty(void)
-    {
-        return count == 0 ? true : false;
-    }
+    template<class P, class Condition>
+    friend Queue<P> filter(Queue<P> queue,Condition condition);
 
+
+    class EmptyQueue {};
+
+private:
+    Node<T>* m_first;
+    Node<T>* m_last;
+    int m_counter;
 };
+
+template <class P, class Condition>
+Queue<P> filter(Queue<P> queue , Condition condition) {
+    {
+        Queue<P> result;
+        for (const P& element: queue) {
+            if ( condition(element) ){
+                result.pushBack(element);
+            }
+        }
+        return result;
+    }
+}
 
 
 #endif //EX3_QUEUE_H

@@ -2,30 +2,30 @@
 // Created by shlom on 23/05/2022.
 //
 
-#ifndef UNTITLED1_NODE_H
-#define UNTITLED1_NODE_H
+#ifndef EX3_NODE_H
+#define EX3_NODE_H
 template <class T>
 class Node
 {
 private:
-    T data;
-    Node* next;
+    T m_data;
+    Node* m_next;
 public:
     void setData(T element)
     {
-        data = element;
+        m_data = element;
     }
     void setNext(Node<T>* element)
     {
-        next = element;
+        m_next = element;
     }
-    T getData(void)
+    T getData()
     {
-        return data;
+        return m_data;
     }
-    Node* getNext(void)
+    Node* getNext()
     {
-        return next;
+        return m_next;
     }
 };
-#endif //UNTITLED1_NODE_H
+#endif //EX3_NODE_H
