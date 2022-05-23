@@ -58,16 +58,7 @@ public:
     */
     HealthPoints& operator-=(const int hp);
 
-    /*
-     * Operator == compare between two HealthPoints
-     *
-     * @param HealthPoints
-     * @return
-     *      true - if this_hp == other_hp
-     *      false - if this_hp != other_hp
-     *
-    */
-    friend bool operator==(const HealthPoints hp,const HealthPoints other_hp) const;
+
 
     /*
      * Operator !=
@@ -89,15 +80,6 @@ public:
     */
     bool operator<=(const HealthPoints other_hp) const;
 
-    /*
-     * Operator <
-     *
-     * @param HealthPoints
-     * @return
-     *      true - if this_hp < other_hp
-     *      false - if this_hp >= other_hp
-    */
-    friend bool operator<(const HealthPoints hp, const HealthPoints other_hp) const;
 
     /*
      * Operator >=
@@ -119,6 +101,29 @@ public:
      *      false - if this_hp <= other_hp
     */
     bool operator>(const HealthPoints other_hp) const;
+
+
+    /*
+    * Operator == compare between two HealthPoints
+    *
+    * @param HealthPoints
+    * @return
+    *      true - if this_hp == other_hp
+    *      false - if this_hp != other_hp
+    *
+    */
+    friend bool operator==(const HealthPoints hp,const HealthPoints other_hp);
+
+
+    /*
+    * Operator <
+    *
+    * @param HealthPoints
+    * @return
+    *      true - if this_hp < other_hp
+    *      false - if this_hp >= other_hp
+    */
+    friend bool operator<(const HealthPoints hp, const HealthPoints other_hp);
 
 
     /*
