@@ -9,7 +9,6 @@
 template <class T>
 class Queue
 {
-
 public:
     Queue():
             m_first(nullptr),
@@ -73,6 +72,13 @@ public:
     template<class P, class Condition>
     friend Queue<P> filter(Queue<P> queue,Condition condition);
 
+    template<class Operation>
+    void transform(Operation operation)
+    {
+        for (const T& element: *this) {
+            operation(element);
+            }
+    }
 
     class EmptyQueue {};
 
