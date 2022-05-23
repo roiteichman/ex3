@@ -5,6 +5,7 @@
 #ifndef EX3_QUEUE_H
 #define EX3_QUEUE_H
 #include "Node.h"
+#include <cassert>
 
 template <class T>
 class Queue
@@ -80,6 +81,10 @@ public:
             }
     }
 
+    class Iterator;
+    Iterator begin();
+    Iterator end();
+
     class EmptyQueue {};
 
 private:
@@ -100,6 +105,30 @@ Queue<P> filter(Queue<P> queue , Condition condition) {
         return result;
     }
 }
+
+template<class T>
+class Queue<T>::Iterator{
+public:
+    const T& operator*() const
+    {
+        _assert(!(m_queue->isEmpty()) && m_current);
+        return m_current.getData();
+    }
+    Iterator& operator++();
+    Iterator operator++(int);
+    bool operator!=(const Iterator& iterator) const;
+
+private:
+    const Queue<T>* m_queue;
+    Node<T> m_current;
+    Iterator(const Queue<T>* queue, Node<T> current):
+        m_queue(queue),
+        m_current(current)
+    {};
+    friend class Queue<T>;
+
+};
+
 
 
 #endif //EX3_QUEUE_H
