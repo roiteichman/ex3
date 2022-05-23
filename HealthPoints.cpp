@@ -27,11 +27,36 @@ HealthPoints& HealthPoints::operator+=(const int hp)
 
 HealthPoints HealthPoints::operator+(const int hp) const
 {
-
+    if (m_hp+hp <= m_max_hp){
+        HealthPoints result(*this);
+        return  (result += hp);
+    }
+    else{
+        return HealthPoints(m_max_hp);
+    }
 }
 
+HealthPoints& HealthPoints::operator-=(const int hp)
+{
+    if (m_hp-hp>0){
+        m_hp-=hp;
+    }
+    else{
+        m_hp=0;
+    }
+    return *this;
+}
 
-
+HealthPoints HealthPoints::operator-(const int hp) const
+{
+    if (m_hp-hp > 0){
+        HealthPoints result(*this);
+        return  (result -= hp);
+    }
+    else{
+        return HealthPoints(0);
+    }
+}
 
 
 

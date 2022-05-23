@@ -56,7 +56,7 @@ public:
      * @return
      *      this
     */
-    HealthPoints& operator-=(const int hp) const;
+    HealthPoints& operator-=(const int hp);
 
     /*
      * Operator == compare between two HealthPoints
