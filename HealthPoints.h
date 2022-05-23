@@ -67,7 +67,7 @@ public:
      *      false - if this_hp != other_hp
      *
     */
-    friend bool operator==(const HealthPoints other_hp) const;
+    friend bool operator==(const HealthPoints hp,const HealthPoints other_hp) const;
 
     /*
      * Operator !=
@@ -97,7 +97,7 @@ public:
      *      true - if this_hp < other_hp
      *      false - if this_hp >= other_hp
     */
-    friend bool operator<(const HealthPoints other_hp) const;
+    friend bool operator<(const HealthPoints hp, const HealthPoints other_hp) const;
 
     /*
      * Operator >=
