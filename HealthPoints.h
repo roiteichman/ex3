@@ -47,7 +47,7 @@ public:
      * @return
      *      this
     */
-    HealthPoints& operator+=(const int hp) const;
+    HealthPoints& operator+=(const int hp);
 
     /*
     * Operator - decrease the argument passed to the amount of hp the player had
@@ -121,9 +121,17 @@ public:
     bool operator>(const HealthPoints other_hp) const;
 
 
+    /*
+     * Operator << for ostream
+     *
+     * @param ostream type
+     * @param hp - to send to ostream
+     * @return
+     *      ostream after changes
+    */
     friend ostream& operator<<(std::ostream&, const HealthPoints& hp);
 
-
+    class InvalidArgument {};
 
 private:
     int m_hp;
