@@ -65,7 +65,7 @@ bool operator==(const HealthPoints hp, const HealthPoints other_hp)
 }
 
 
-bool operator<(HealthPoints hp, HealthPoints other_hp)
+bool operator<(const HealthPoints hp, const HealthPoints other_hp)
 {
     return hp.m_hp<other_hp.m_hp;
 }
