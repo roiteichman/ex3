@@ -134,7 +134,7 @@ public:
      * @return
      *      ostream after changes
     */
-    friend ostream& operator<<(std::ostream&, const HealthPoints& hp);
+    friend ostream& operator<<(std::ostream& os, const HealthPoints& hp);
 
     class InvalidArgument {};
 
