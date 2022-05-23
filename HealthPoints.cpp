@@ -68,12 +68,10 @@ bool HealthPoints::operator>(const HealthPoints other_hp) const
     return *this<other_hp;
 }
 
-
 bool operator==(const HealthPoints hp, const HealthPoints other_hp)
 {
     return hp.m_hp==other_hp.m_hp;
 }
-
 
 bool operator<(const HealthPoints hp, const HealthPoints other_hp)
 {
@@ -85,6 +83,15 @@ ostream& operator<<(std::ostream& os, const HealthPoints& hp)
     os << hp.m_hp << "(" << hp.m_max_hp<< ")"<< std::endl;
 }
 
+bool HealthPoints::operator!=(const HealthPoints other_hp) const
+{
+    return !(*this == other_hp);
+}
+
+bool HealthPoints::operator<=(const HealthPoints other_hp) const
+{
+    return !(other_hp < *this);
+}
 
 
 
