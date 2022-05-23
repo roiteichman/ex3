@@ -37,5 +37,5 @@ HealthPoints HealthPoints::operator+(const int hp) const
 
 bool operator<(const HealthPoints hp) const
 {
-    return m_hp>other_hp.
+    return m_hp>other_hp.vf;
 }
