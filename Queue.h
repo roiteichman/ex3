@@ -78,13 +78,9 @@ public:
     template<class P, class Condition>
     friend Queue<P> filter(Queue<P> queue,Condition condition);
 
-    template<class Operation>
-    void transform(Operation operation)
-    {
-        for (const T& element: *this) {
-            operation(element);
-            }
-    }
+    template<class P, class Operation>
+    friend void transform(Queue<P> queue, Operation operation);
+
 
     class Iterator;
     Iterator begin()
@@ -105,7 +101,7 @@ private:
 };
 
 template <class P, class Condition>
-Queue<P> filter(Queue<P> queue , Condition condition) {
+Queue<P> filter(Queue<P> queue ,Condition condition) {
     {
         Queue<P> result;
         for (const P& element: queue) {
@@ -114,6 +110,14 @@ Queue<P> filter(Queue<P> queue , Condition condition) {
             }
         }
         return result;
+    }
+}
+
+template<class P, class Operation>
+void transform(Queue<P> queue ,Operation operation)
+{
+    for (const P& element: queue) {
+        operation(element);
     }
 }
 
