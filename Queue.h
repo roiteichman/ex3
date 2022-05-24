@@ -44,7 +44,7 @@ public:
         m_counter++;
     }
 
-    T front()
+    T& front()
     {
         if (isEmpty()) {
             throw EmptyQueue();
@@ -65,7 +65,7 @@ public:
     }
 
 
-    int Size()
+    int size()
     {
         return m_counter;
     }
@@ -82,6 +82,7 @@ public:
     friend void transform(Queue<P> queue, Operation operation);
 
 
+
     class Iterator;
     Iterator begin()
     {
@@ -91,6 +92,19 @@ public:
     {
         return Iterator(this, NULL);
     }
+
+
+    class ConstIterator;
+    ConstIterator begin()
+    {
+        return ConstIterator(this, this->m_first);
+    }
+    ConstIterator end()
+    {
+        return ConstIterator(this, NULL);
+    }
+
+
 
     class EmptyQueue {};
 
@@ -175,7 +189,6 @@ private:
     friend class Queue<T>;
 
 };
-
 
 
 #endif //EX3_QUEUE_H
