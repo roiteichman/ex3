@@ -131,12 +131,18 @@ public:
     }
     Iterator& operator++()
     {
+        if (!m_current){
+            throw InvalidOperation();
+        }
         m_current=m_current.getNext();
         return *this;
     }
 
     Iterator operator++(int)
     {
+        if (!m_current){
+            throw InvalidOperation();
+        }
         Iterator result = *this;
         ++*this;
         return result;
@@ -157,6 +163,7 @@ public:
 
     Iterator& operator=(const Iterator&) = default;
 
+    class InvalidOperation {};
 
 private:
     const Queue<T>* m_queue;
