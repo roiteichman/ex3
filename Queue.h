@@ -23,6 +23,11 @@ public:
             popFront();
     }
 
+    Queue(const Queue&) = default;
+
+    Queue& operator=(const Queue&) = default;
+
+
     void pushBack(T element)
     {
         Node<T>* tmp = new Node<T>();
