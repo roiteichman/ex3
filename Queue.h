@@ -82,8 +82,14 @@ public:
     }
 
     class Iterator;
-    Iterator begin();
-    Iterator end();
+    Iterator begin()
+    {
+        return Iterator(this, this->m_first);
+    }
+    Iterator end()
+    {
+        return Iterator(this, NULL);
+    }
 
     class EmptyQueue {};
 
