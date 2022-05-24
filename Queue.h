@@ -114,9 +114,34 @@ public:
         _assert(!(m_queue->isEmpty()) && m_current);
         return m_current.getData();
     }
-    Iterator& operator++();
-    Iterator operator++(int);
-    bool operator!=(const Iterator& iterator) const;
+    Iterator& operator++()
+    {
+        m_current=m_current.getNext();
+        return *this;
+    }
+
+    Iterator operator++(int)
+    {
+        Iterator result = *this;
+        ++*this;
+        return result;
+    }
+
+    bool operator==(const Iterator& iterator) const
+    {
+        _assert(m_queue == iterator.m_queue);
+        return m_current == iterator.m_current;
+    }
+
+    bool operator!=(const Iterator& iterator) const
+    {
+        return !(*this == iterator);
+    }
+
+    Iterator(const Iterator&) = default;
+
+    Iterator& operator=(const Iterator&) = default;
+
 
 private:
     const Queue<T>* m_queue;
