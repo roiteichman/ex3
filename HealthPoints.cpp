@@ -13,7 +13,7 @@ m_max_hp(hp)
     }
 }
 
-HealthPoints& HealthPoints::operator+=(const int hp)
+HealthPoints& HealthPoints::operator+=(int hp)
 {
     if (m_hp+hp<=m_max_hp){
         m_hp+=hp;
@@ -25,7 +25,7 @@ HealthPoints& HealthPoints::operator+=(const int hp)
 }
 
 
-HealthPoints HealthPoints::operator+(const int hp) const
+HealthPoints HealthPoints::operator+(int hp) const
 {
     if (m_hp+hp <= m_max_hp){
         HealthPoints result(*this);
@@ -36,7 +36,7 @@ HealthPoints HealthPoints::operator+(const int hp) const
     }
 }
 
-HealthPoints& HealthPoints::operator-=(const int hp)
+HealthPoints& HealthPoints::operator-=(int hp)
 {
     if (m_hp-hp>0){
         m_hp-=hp;
@@ -47,7 +47,7 @@ HealthPoints& HealthPoints::operator-=(const int hp)
     return *this;
 }
 
-HealthPoints HealthPoints::operator-(const int hp) const
+HealthPoints HealthPoints::operator-(int hp) const
 {
     if (m_hp-hp > 0){
         HealthPoints result(*this);
@@ -58,37 +58,37 @@ HealthPoints HealthPoints::operator-(const int hp) const
     }
 }
 
-bool HealthPoints::operator>=(const HealthPoints other_hp) const
+bool HealthPoints::operator>=(HealthPoints other_hp) const
 {
     return other_hp <= *this;
 }
 
-bool HealthPoints::operator>(const HealthPoints other_hp) const
+bool HealthPoints::operator>(HealthPoints other_hp) const
 {
     return *this<other_hp;
 }
 
-bool operator==(const HealthPoints hp, const HealthPoints other_hp)
+bool operator==(HealthPoints hp, HealthPoints other_hp)
 {
     return hp.m_hp==other_hp.m_hp;
 }
 
-bool operator<(const HealthPoints hp, const HealthPoints other_hp)
+bool operator<(HealthPoints hp, HealthPoints other_hp)
 {
     return hp.m_hp<other_hp.m_hp;
 }
 
-ostream& operator<<(std::ostream& os, const HealthPoints& hp)
+ostream& operator<<(std::ostream& os, HealthPoints& hp)
 {
     os << hp.m_hp << "(" << hp.m_max_hp<< ")"<< std::endl;
 }
 
-bool HealthPoints::operator!=(const HealthPoints other_hp) const
+bool HealthPoints::operator!=(HealthPoints other_hp) const
 {
     return !(*this == other_hp);
 }
 
-bool HealthPoints::operator<=(const HealthPoints other_hp) const
+bool HealthPoints::operator<=(HealthPoints other_hp) const
 {
     return !(other_hp < *this);
 }

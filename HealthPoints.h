@@ -28,7 +28,7 @@ public:
      * @return
      *      HealthPoints object after increasing
     */
-    HealthPoints operator+(const int hp) const;
+    HealthPoints operator+(int hp) const;
 
     /*
      * Operator - decrease the argument passed to the amount of hp the player had
@@ -37,7 +37,7 @@ public:
      * @return
      *      HealthPoints object after decreasing
     */
-    HealthPoints operator-(const int hp) const;
+    HealthPoints operator-(int hp) const;
 
 
     /*
@@ -47,18 +47,34 @@ public:
      * @return
      *      this
     */
-    HealthPoints& operator+=(const int hp);
+    HealthPoints& operator+=(int hp);
 
     /*
-    * Operator - decrease the argument passed to the amount of hp the player had
+     * Operator - decrease the argument passed to the amount of hp the player had
      *
      * @param int hp - the amount will decrease from the hp
      * @return
      *      this
     */
-    HealthPoints& operator-=(const int hp);
+    HealthPoints& operator-=(int hp);
 
+    /*
+    * copy c'tor
+    *
+    * @param
+    * @return
+    *      new HealthPoints
+    */
+    HealthPoints(const HealthPoints&) = default;
 
+    /*
+    * Operator =
+    *
+    * @param
+    * @return
+    *      reference
+    */
+    HealthPoints& operator=(const HealthPoints&) = default;
 
     /*
      * Operator !=
@@ -68,7 +84,7 @@ public:
      *      true - if this_hp != other_hp
      *      false - if this_hp == other_hp
     */
-    bool operator!=(const HealthPoints other_hp) const;
+    bool operator!=(HealthPoints other_hp) const;
 
     /*
      * Operator <=
@@ -78,7 +94,7 @@ public:
      *      true - if this_hp <= other_hp
      *      false - if this_hp > other_hp
     */
-    bool operator<=(const HealthPoints other_hp) const;
+    bool operator<=(HealthPoints other_hp) const;
 
 
     /*
@@ -89,7 +105,7 @@ public:
      *      true - if this_hp >= other_hp
      *      false - if this_hp < other_hp
     */
-    bool operator>=(const HealthPoints other_hp) const;
+    bool operator>=(HealthPoints other_hp) const;
 
 
     /*
@@ -100,7 +116,7 @@ public:
      *      true - if this_hp > other_hp
      *      false - if this_hp <= other_hp
     */
-    bool operator>(const HealthPoints other_hp) const;
+    bool operator>(HealthPoints other_hp) const;
 
 
     /*
@@ -112,7 +128,7 @@ public:
     *      false - if this_hp != other_hp
     *
     */
-    friend bool operator==(const HealthPoints hp,const HealthPoints other_hp);
+    friend bool operator==(HealthPoints hp, HealthPoints other_hp);
 
 
     /*
@@ -123,7 +139,7 @@ public:
     *      true - if this_hp < other_hp
     *      false - if this_hp >= other_hp
     */
-    friend bool operator<(const HealthPoints hp, const HealthPoints other_hp);
+    friend bool operator<(HealthPoints hp, HealthPoints other_hp);
 
 
     /*
@@ -134,13 +150,13 @@ public:
      * @return
      *      ostream after changes
     */
-    friend ostream& operator<<(std::ostream& os, const HealthPoints& hp);
+    friend ostream& operator<<(std::ostream& os, HealthPoints& hp);
 
     class InvalidArgument {};
 
 private:
     int m_hp;
-    const int m_max_hp;
+    int m_max_hp;
 };
 
 #endif //EX3_HEALTHPOINTS_H

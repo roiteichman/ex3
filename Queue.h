@@ -84,6 +84,8 @@ public:
 
 
     class Iterator;
+    class ConstIterator;
+
     Iterator begin()
     {
         return Iterator(this, this->m_first);
@@ -93,18 +95,14 @@ public:
         return Iterator(this, NULL);
     }
 
-
-    class ConstIterator;
-    ConstIterator begin()
+    ConstIterator begin() const
     {
         return ConstIterator(this, this->m_first);
     }
-    ConstIterator end()
+    ConstIterator end() const
     {
         return ConstIterator(this, NULL);
     }
-
-
 
     class EmptyQueue {};
 
@@ -185,6 +183,62 @@ private:
     Iterator(const Queue<T>* queue, Node<T> current):
         m_queue(queue),
         m_current(current)
+    {};
+    friend class Queue<T>;
+
+};
+
+
+template<class T>
+class Queue<T>::ConstIterator{
+public:
+    const T& operator*() const
+    {
+        _assert(!(m_queue->isEmpty()) && m_current);
+        return m_current.getData();
+    }
+    ConstIterator& operator++()
+    {
+        if (!m_current){
+            throw InvalidOperation();
+        }
+        m_current=m_current.getNext();
+        return *this;
+    }
+
+    ConstIterator operator++(int)
+    {
+        if (!m_current){
+            throw InvalidOperation();
+        }
+        ConstIterator result = *this;
+        ++*this;
+        return result;
+    }
+
+    bool operator==(const ConstIterator& constIterator) const
+    {
+        _assert(m_queue == constIterator.m_queue);
+        return m_current == constIterator.m_current;
+    }
+
+    bool operator!=(const ConstIterator& constIterator) const
+    {
+        return !(*this == constIterator);
+    }
+
+    ConstIterator(const ConstIterator&) = default;
+
+    ConstIterator& operator=(const ConstIterator&) = default;
+
+    class InvalidOperation {};
+
+private:
+    const Queue<T>* m_queue;
+    Node<T> m_current;
+    ConstIterator(const Queue<T>* queue, Node<T> current):
+            m_queue(queue),
+            m_current(current)
     {};
     friend class Queue<T>;
 
