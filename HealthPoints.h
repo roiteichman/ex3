@@ -17,9 +17,9 @@ public:
      * @return
      *      A new instance of HealthPoints
     */
-    explicit HealthPoints(int hp = STARTING_HP);
+    HealthPoints(int hp = STARTING_HP);
 
-
+    HealthPoints(const HealthPoints&) = default;
 
     /*
      * Operator + increase the argument passed to the amount of hp the player had
@@ -28,8 +28,9 @@ public:
      * @return
      *      HealthPoints object after increasing
     */
-    HealthPoints operator+(int hp) const;
+    friend HealthPoints operator+(int hp, HealthPoints healthPoints);
 
+    HealthPoints operator+(int hp);
     /*
      * Operator - decrease the argument passed to the amount of hp the player had
      *
@@ -65,7 +66,7 @@ public:
     * @return
     *      new HealthPoints
     */
-    HealthPoints(const HealthPoints&) = default;
+
 
     /*
     * Operator =
@@ -75,7 +76,6 @@ public:
     *      reference
     */
     HealthPoints& operator=(const HealthPoints&) = default;
-
     /*
      * Operator !=
      *
@@ -150,7 +150,7 @@ public:
      * @return
      *      ostream after changes
     */
-    friend ostream& operator<<(std::ostream& os, HealthPoints& hp);
+    friend ostream& operator<<(std::ostream& os, const HealthPoints& hp);
 
     class InvalidArgument {};
 

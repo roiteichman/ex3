@@ -25,16 +25,7 @@ HealthPoints& HealthPoints::operator+=(int hp)
 }
 
 
-HealthPoints HealthPoints::operator+(int hp) const
-{
-    if (m_hp+hp <= m_max_hp){
-        HealthPoints result(*this);
-        return  (result += hp);
-    }
-    else{
-        return HealthPoints(m_max_hp);
-    }
-}
+
 
 HealthPoints& HealthPoints::operator-=(int hp)
 {
@@ -78,7 +69,7 @@ bool operator<(HealthPoints hp, HealthPoints other_hp)
     return hp.m_hp<other_hp.m_hp;
 }
 
-ostream& operator<<(std::ostream& os, HealthPoints& hp)
+ostream& operator<<(std::ostream& os, const HealthPoints& hp)
 {
     os << hp.m_hp << "(" << hp.m_max_hp<< ")"<< std::endl;
 }
@@ -92,6 +83,22 @@ bool HealthPoints::operator<=(HealthPoints other_hp) const
 {
     return !(other_hp < *this);
 }
+
+HealthPoints HealthPoints::operator+(int hp) {
+    return hp + *this;
+}
+
+HealthPoints operator+(int hp, HealthPoints healthPoints)
+{
+    if (healthPoints.m_hp+hp <= healthPoints.m_max_hp){
+        HealthPoints result(healthPoints);
+        return  (result += hp);
+    }
+    else{
+        return HealthPoints(healthPoints.m_max_hp);
+    }
+}
+
 
 
 

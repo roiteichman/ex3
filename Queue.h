@@ -6,7 +6,7 @@
 #define EX3_QUEUE_H
 #include "Node.h"
 #include <cassert>
-
+typedef int T;
 template <class T>
 class Queue
 {
@@ -30,7 +30,7 @@ public:
 
     void pushBack(T element)
     {
-        Node<T>* tmp = new Node<T>();
+        Node<T>* tmp;
         tmp->setData(element);
         tmp->setNext(nullptr);
 
@@ -70,7 +70,7 @@ public:
         return m_counter;
     }
 
-    bool isEmpty()
+    bool isEmpty() const
     {
         return m_counter == 0;
     }
@@ -128,25 +128,27 @@ Queue<P> filter(Queue<P> queue ,Condition condition) {
 template<class P, class Operation>
 void transform(Queue<P> queue ,Operation operation)
 {
-    for (const P& element: queue) {
-        operation(element);
+    for (typename Queue<P>::Iterator i = queue.begin(); i != queue.end(); ++i) {
+        operation(*i);
     }
 }
 
 template<class T>
 class Queue<T>::Iterator{
 public:
-    const T& operator*() const
+    T& operator*() const
     {
-        _assert(!(m_queue->isEmpty()) && m_current);
-        return m_current.getData();
+        if(!(m_queue->isEmpty()) && (&m_current)) {
+            return m_current->getData();
+        }
+        //important
     }
     Iterator& operator++()
     {
-        if (!m_current){
+        if (!(&m_current)){
             throw InvalidOperation();
         }
-        m_current=m_current.getNext();
+        m_current = m_current->getNext();
         return *this;
     }
 
@@ -162,7 +164,10 @@ public:
 
     bool operator==(const Iterator& iterator) const
     {
-        _assert(m_queue == iterator.m_queue);
+        if(!(m_queue == iterator.m_queue))
+        {
+            throw InvalidOperation();
+        };
         return m_current == iterator.m_current;
     }
 
@@ -179,10 +184,10 @@ public:
 
 private:
     const Queue<T>* m_queue;
-    Node<T> m_current;
-    Iterator(const Queue<T>* queue, Node<T> current):
-        m_queue(queue),
-        m_current(current)
+    Node<T> *m_current;
+    Iterator(const Queue<T> *queue, Node<T> *current):
+            m_queue(queue),
+            m_current(current)
     {};
     friend class Queue<T>;
 
@@ -194,15 +199,15 @@ class Queue<T>::ConstIterator{
 public:
     const T& operator*() const
     {
-        _assert(!(m_queue->isEmpty()) && m_current);
-        return m_current.getData();
+        if(!(m_queue->isEmpty()) && m_current);
+        return m_current->getData();
     }
     ConstIterator& operator++()
     {
-        if (!m_current){
+        if (!(m_current)){
             throw InvalidOperation();
         }
-        m_current=m_current.getNext();
+        m_current = m_current->getNext();
         return *this;
     }
 
@@ -218,7 +223,10 @@ public:
 
     bool operator==(const ConstIterator& constIterator) const
     {
-        _assert(m_queue == constIterator.m_queue);
+        if(!(m_queue == constIterator.m_queue))
+        {
+            throw InvalidOperation();
+        };
         return m_current == constIterator.m_current;
     }
 
@@ -235,8 +243,8 @@ public:
 
 private:
     const Queue<T>* m_queue;
-    Node<T> m_current;
-    ConstIterator(const Queue<T>* queue, Node<T> current):
+    Node<T> *m_current;
+    ConstIterator(const Queue<T>* queue, Node<T>* current):
             m_queue(queue),
             m_current(current)
     {};
