@@ -20,6 +20,8 @@ public:
     {
         while(!isEmpty())
             popFront();
+        if (m_counter==0)
+            m_last = NULL;
     }
 
     Queue(const Queue&) = default;
