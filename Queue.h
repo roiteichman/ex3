@@ -78,9 +78,11 @@ public:
         if ( isEmpty() ){
             throw EmptyQueue();
         }
+        if (m_first == nullptr){
+            return;
+        }
         Node<T>* tmp = m_first;
         m_first = m_first->getNext();
-        tmp->setNext(nullptr);
         m_counter--;
         delete tmp;
     }
