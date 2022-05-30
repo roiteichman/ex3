@@ -22,7 +22,7 @@ public:
             popFront();
     }
 
-    Queue(const Queue& queue):
+    Queue(const Queue<T>& queue):
     m_first(NULL),
     m_last(NULL),
     m_counter(0)
@@ -38,9 +38,9 @@ public:
         }
     }
 
-    Queue& operator=(const Queue& queue)
+    Queue& operator=(const Queue<T>& queue)
     {
-        if (this== &queue){
+        if (this == &queue){
             return *this;
         }
         Queue<T>* queue1 = new Queue<T>();
@@ -55,9 +55,9 @@ public:
             throw;
         }
         delete this->m_first;
-        this->m_first=queue1->m_first;
-        this->m_counter=queue1->m_counter;
-        this->m_last=queue1->m_last;
+        this->m_first = queue1->m_first;
+        this->m_counter = queue1->m_counter;
+        this->m_last = queue1->m_last;
         return *this;
     }
 
@@ -172,6 +172,13 @@ void transform(Queue<P> &queue ,Operation operation)
 template<class T>
 class Queue<T>::Iterator{
 public:
+    Iterator(const Iterator&) = default;
+
+    Iterator& operator=(const Iterator&) = default;
+
+    ~Iterator() = default;
+    class InvalidOperation {};
+
     T& operator*() const
     {
         if(!(m_queue->isEmpty()) && (&m_current))
@@ -179,7 +186,6 @@ public:
             return m_current->getData();
         }
         throw InvalidOperation();
-        //important
     }
     Iterator& operator++()
     {
@@ -214,11 +220,6 @@ public:
         return !(*this == iterator);
     }
 
-    Iterator(const Iterator&) = default;
-
-    Iterator& operator=(const Iterator&) = default;
-
-    class InvalidOperation {};
 
 private:
     const Queue<T>* m_queue;
@@ -235,6 +236,14 @@ private:
 template<class T>
 class Queue<T>::ConstIterator{
 public:
+    ConstIterator(const ConstIterator&) = default;
+
+    ConstIterator& operator=(const ConstIterator&) = default;
+
+    ~ConstIterator() = default;
+
+    class InvalidOperation {};
+
     const T& operator*() const
     {
         if(!(m_queue->isEmpty()) && m_current);
@@ -273,11 +282,6 @@ public:
         return !(*this == constIterator);
     }
 
-    ConstIterator(const ConstIterator&) = default;
-
-    ConstIterator& operator=(const ConstIterator&) = default;
-
-    class InvalidOperation {};
 
 private:
     const Queue<T>* m_queue;
