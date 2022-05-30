@@ -22,7 +22,21 @@ public:
             popFront();
     }
 
-    Queue(const Queue&) = default;
+    Queue(const Queue& queue):
+    m_first(NULL),
+    m_last(NULL),
+    m_counter(0)
+    {
+        try {
+            for (const T &element: queue) {
+                this->pushBack(element);
+            }
+        }
+        catch (...){
+            delete this;
+            throw;
+        }
+    }
 
     Queue& operator=(const Queue& queue)
     {
