@@ -13,9 +13,12 @@ private:
     Node* m_next;
 public:
     Node():
-    m_next(NULL),
-    m_data(0)
+    m_next(NULL)
+   // m_data(0)
     {}
+    Node(const Node&) = default;
+    Node& operator=(const Node&) = default;
+    ~Node() = default;
     void setData(T element)
     {
         if(this!= nullptr)
@@ -23,9 +26,6 @@ public:
             m_data = element;
         }
     }
-    Node(const Node&) = default;
-
-    Node& operator=(const Node&) = default;
     void setNext(Node<T>* element)
     {
         if(this!= nullptr) {

@@ -6,7 +6,6 @@
 #define EX3_QUEUE_H
 #include "Node.h"
 #include <cassert>
-typedef int T;
 template <class T>
 class Queue
 {
@@ -25,7 +24,28 @@ public:
 
     Queue(const Queue&) = default;
 
-    Queue& operator=(const Queue&) = default;
+    Queue& operator=(const Queue& queue)
+    {
+        if (this== &queue){
+            return *this;
+        }
+        Queue<T>* queue1 = new Queue<T>();
+
+        try {
+            for (const T &element: queue) {
+                queue1->pushBack(element);
+            }
+        }
+        catch (...){
+            delete queue1->m_first;
+            throw;
+        }
+        delete this->m_first;
+        this->m_first=queue1->m_first;
+        this->m_counter=queue1->m_counter;
+        this->m_last=queue1->m_last;
+        return *this;
+    }
 
 
     void pushBack(T element)
@@ -79,7 +99,7 @@ public:
     friend Queue<P> filter(Queue<P> queue,Condition condition);
 
     template<class P, class Operation>
-    friend void transform(Queue<P> queue, Operation operation);
+    friend void transform(Queue<P> &queue, Operation operation);
 
 
 
@@ -114,7 +134,6 @@ private:
 
 template <class P, class Condition>
 Queue<P> filter(Queue<P> queue ,Condition condition) {
-    {
         Queue<P> result;
         for (const P& element: queue) {
             if ( condition(element) ){
@@ -122,11 +141,10 @@ Queue<P> filter(Queue<P> queue ,Condition condition) {
             }
         }
         return result;
-    }
 }
 
 template<class P, class Operation>
-void transform(Queue<P> queue ,Operation operation)
+void transform(Queue<P> &queue ,Operation operation)
 {
     for (typename Queue<P>::Iterator i = queue.begin(); i != queue.end(); ++i) {
         operation(*i);
