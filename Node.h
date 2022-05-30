@@ -4,31 +4,42 @@
 
 #ifndef EX3_NODE_H
 #define EX3_NODE_H
+#define NULL 0
 template <class T>
 class Node
 {
 private:
-    T *m_data;
+    T m_data;
     Node* m_next;
 public:
+    Node():
+    m_next(NULL),
+    m_data(0)
+    {}
     void setData(T element)
     {
-        *m_data = element;
+        if(this!= nullptr)
+        {
+            m_data = element;
+        }
     }
     Node(const Node&) = default;
 
     Node& operator=(const Node&) = default;
     void setNext(Node<T>* element)
     {
-        m_next = element;
+        if(this!= nullptr) {
+            m_next = element;
+        }
     }
-    T& getData() const
+    T& getData()
     {
-        return *m_data;
+        return m_data;
     }
     Node* getNext()
     {
-        return m_next;
+        if(this!= nullptr)
+            return m_next;
     }
 };
 #endif //EX3_NODE_H

@@ -30,7 +30,7 @@ public:
 
     void pushBack(T element)
     {
-        Node<T>* tmp;
+        Node<T>* tmp = new Node<T>();
         tmp->setData(element);
         tmp->setNext(nullptr);
 
@@ -44,7 +44,7 @@ public:
         m_counter++;
     }
 
-    T& front()
+    T& front() const
     {
         if (isEmpty()) {
             throw EmptyQueue();
@@ -61,11 +61,11 @@ public:
         Node<T>* tmp = m_first;
         m_first = m_first->getNext();
         m_counter--;
-        delete tmp;
+        //delete tmp;
     }
 
 
-    int size()
+    int size() const
     {
         return m_counter;
     }
@@ -145,7 +145,7 @@ public:
     }
     Iterator& operator++()
     {
-        if (!(&m_current)){
+        if (!(m_current)){
             throw InvalidOperation();
         }
         m_current = m_current->getNext();

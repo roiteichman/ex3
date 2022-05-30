@@ -8,7 +8,7 @@ HealthPoints::HealthPoints(int hp):
 m_hp(hp),
 m_max_hp(hp)
 {
-    if(m_max_hp<0){
+    if(m_max_hp<=0){
         throw InvalidArgument();
     }
 }
@@ -56,7 +56,7 @@ bool HealthPoints::operator>=(HealthPoints other_hp) const
 
 bool HealthPoints::operator>(HealthPoints other_hp) const
 {
-    return *this<other_hp;
+    return other_hp<*this;
 }
 
 bool operator==(HealthPoints hp, HealthPoints other_hp)
