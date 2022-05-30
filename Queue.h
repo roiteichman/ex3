@@ -78,7 +78,7 @@ public:
         if ( isEmpty() ){
             throw EmptyQueue();
         }
-        Node<T>* tmp = m_first;
+        //Node<T>* tmp = m_first;
         m_first = m_first->getNext();
         m_counter--;
         //delete tmp;
@@ -156,9 +156,11 @@ class Queue<T>::Iterator{
 public:
     T& operator*() const
     {
-        if(!(m_queue->isEmpty()) && (&m_current)) {
+        if(!(m_queue->isEmpty()) && (&m_current))
+        {
             return m_current->getData();
         }
+        throw InvalidOperation();
         //important
     }
     Iterator& operator++()

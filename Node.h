@@ -39,7 +39,10 @@ public:
     Node* getNext()
     {
         if(this!= nullptr)
+        {
             return m_next;
+        }
+        throw;
     }
 };
 #endif //EX3_NODE_H
