@@ -78,10 +78,10 @@ public:
         if ( isEmpty() ){
             throw EmptyQueue();
         }
-        //Node<T>* tmp = m_first;
+        Node<T>* tmp = m_first;
         m_first = m_first->getNext();
         m_counter--;
-        //delete tmp;
+        delete tmp;
     }
 
 
