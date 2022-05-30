@@ -19,11 +19,7 @@ public:
     ~Queue()
     {
         while(!isEmpty())
-        {
-            Node<T>* tmp = m_first;
-            m_first = m_first->getNext();
-            delete tmp;
-        }
+            popFront();
     }
 
     Queue(const Queue&) = default;
@@ -81,6 +77,9 @@ public:
     {
         if ( isEmpty() ){
             throw EmptyQueue();
+        }
+        if (m_first == nullptr){
+            return;
         }
         Node<T>* tmp = m_first;
         m_first = m_first->getNext();
