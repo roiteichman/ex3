@@ -20,8 +20,6 @@ public:
     {
         while(!isEmpty())
             popFront();
-        if (m_counter==0)
-            m_last = NULL;
     }
 
     Queue(const Queue&) = default;
@@ -82,6 +80,7 @@ public:
         }
         Node<T>* tmp = m_first;
         m_first = m_first->getNext();
+        tmp->setNext(nullptr);
         m_counter--;
         delete tmp;
     }
