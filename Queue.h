@@ -10,6 +10,13 @@ template <class T>
 class Queue
 {
 public:
+    /*
+     * C'tor of Queue class
+     *
+     * @param
+     * @return
+     *      A new instance of Queue
+    */
     Queue():
             m_first(nullptr),
             m_last(nullptr),
@@ -22,6 +29,13 @@ public:
             popFront();
     }
 
+    /*
+     * copy C'tor of Queue class
+     *
+     * @param queue- to be copied
+     * @return
+     *      A copy instance of queue
+    */
     Queue(const Queue<T>& queue):
     m_first(NULL),
     m_last(NULL),
@@ -39,6 +53,13 @@ public:
         }
     }
 
+    /*
+    * Operator =
+    *
+    * @param
+    * @return
+    *      reference to a new Queue
+    */
     Queue& operator=(const Queue<T>& queue)
     {
         if (this == &queue){
@@ -68,7 +89,13 @@ public:
     }
 
 
-
+    /*
+    * pushes a new element to the queue
+    *
+    * @param element- the element to be pushed
+    * @return
+    *      void
+    */
     void pushBack(T element)
     {
         Node<T>* tmp = new Node<T>();
@@ -85,6 +112,13 @@ public:
         m_counter++;
     }
 
+    /*
+    * return the first element in the queue by referene
+    *
+    * @param
+    * @return
+    *      reference to the first element in the queue
+    */
     T& front() const
     {
         if (isEmpty()) {
@@ -93,7 +127,13 @@ public:
         return m_first->getData();
     }
 
-
+    /*
+    * delete the first element in the queue
+    *
+    * @param
+    * @return
+    *     void
+    */
     void popFront()
     {
         if ( isEmpty() ){
@@ -108,20 +148,50 @@ public:
         delete tmp;
     }
 
-
+    /*
+    * return the number of elements in the queue
+    *
+    * @param
+    * @return
+    *      the size of the queue
+    */
     int size() const
     {
         return m_counter;
     }
 
+    /*
+    * return if the queue has at least 1 element
+    *
+    * @param
+    * @return
+    *      type bool if the queue has at least 1 element
+    */
     bool isEmpty() const
     {
         return m_counter == 0;
     }
 
+    /*
+    * return a new queue that contains only the elements that was filtred
+     * in the condition method
+    *
+    * @param queue- the queue to be filtred
+     * @param condition - the method that filters the elements
+    * @return
+    *      new filtered Queue object
+    */
     template<class P, class Condition>
     friend Queue<P> filter(Queue<P> queue,Condition condition);
 
+    /*
+   * changes the elements of queue by sending it to operation
+   *
+   * @param queue- the queue to be changed
+    * @param operation - the method that changes the elements
+   * @return
+   *      void
+   */
     template<class P, class Operation>
     friend void transform(Queue<P> &queue, Operation operation);
 
