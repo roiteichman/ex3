@@ -178,13 +178,42 @@ void transform(Queue<P> &queue ,Operation operation)
 template<class T>
 class Queue<T>::Iterator{
 public:
+    /*
+     * the default Copy C'tor of the Iterator
+     *
+     * @param
+     * @return
+     *      new Iterator that equal to the other one
+    */
     Iterator(const Iterator&) = default;
 
+    /*
+     * the default Assigment operator of the Iterator
+     *
+     * @param
+     * @return
+     *      reference to this Iterator
+    */
     Iterator& operator=(const Iterator&) = default;
 
+    /*
+     * the default D'tor of the Iterator
+     *
+     * @param
+     * @return
+     *
+    */
     ~Iterator() = default;
+
     class InvalidOperation {};
 
+    /*
+     * operator*
+     *
+     * @param
+     * @return
+     *      reference to the data of the current Node in the queue
+    */
     T& operator*() const
     {
         if(!(m_queue->isEmpty()) && (&m_current))
@@ -193,6 +222,14 @@ public:
         }
         throw InvalidOperation();
     }
+
+    /*
+     * operator++()
+     *
+     * @param
+     * @return
+     *      reference to this Iterator (before add one)
+    */
     Iterator& operator++()
     {
         if (!(m_current)){
@@ -202,6 +239,13 @@ public:
         return *this;
     }
 
+    /*
+     * operator++(int)
+     *
+     * @param
+     * @return
+     *      new Iterator (after add one to this)
+    */
     Iterator operator++(int)
     {
         if (!m_current){
@@ -212,6 +256,14 @@ public:
         return result;
     }
 
+    /*
+     * operator==
+     *
+     * @param reference to Iterator
+     * @return
+     *      false - if they are not the same
+     *      true - if they are the same
+    */
     bool operator==(const Iterator& iterator) const
     {
         if(!(m_queue == iterator.m_queue))
@@ -221,6 +273,14 @@ public:
         return m_current == iterator.m_current;
     }
 
+    /*
+     * operator!=
+     *
+     * @param reference to Iterator
+     * @return
+     *      true - if they are not the same
+     *      false - if they are the same
+    */
     bool operator!=(const Iterator& iterator) const
     {
         return !(*this == iterator);
@@ -242,19 +302,57 @@ private:
 template<class T>
 class Queue<T>::ConstIterator{
 public:
+
+    /*
+     * the default Copy C'tor of the ConstIterator
+     *
+     * @param
+     * @return
+     *      new ConstIterator that equal to the other one
+    */
     ConstIterator(const ConstIterator&) = default;
 
+    /*
+     * the default Assigment operator of the ConstIterator
+     *
+     * @param
+     * @return
+     *      reference to this ConstIterator
+    */
     ConstIterator& operator=(const ConstIterator&) = default;
 
+    /*
+     * the default D'tor of the ConstIterator
+     *
+     * @param
+     * @return
+     *
+    */
     ~ConstIterator() = default;
+
 
     class InvalidOperation {};
 
+    /*
+     * operator*
+     *
+     * @param
+     * @return
+     *      const reference to the data of the current Node in the queue
+    */
     const T& operator*() const
     {
         if(!(m_queue->isEmpty()) && m_current);
         return m_current->getData();
     }
+
+    /*
+     * operator++()
+     *
+     * @param
+     * @return
+     *      reference to this ConstIterator (before add one)
+    */
     ConstIterator& operator++()
     {
         if (!(m_current)){
@@ -264,6 +362,13 @@ public:
         return *this;
     }
 
+    /*
+     * operator++(int)
+     *
+     * @param
+     * @return
+     *      new ConstIterator (after add one to this)
+    */
     ConstIterator operator++(int)
     {
         if (!m_current){
@@ -274,6 +379,14 @@ public:
         return result;
     }
 
+    /*
+     * operator==
+     *
+     * @param reference to ConstIterator
+     * @return
+     *      false - if they are not the same
+     *      true - if they are the same
+    */
     bool operator==(const ConstIterator& constIterator) const
     {
         if(!(m_queue == constIterator.m_queue))
@@ -283,6 +396,14 @@ public:
         return m_current == constIterator.m_current;
     }
 
+    /*
+     * operator!=
+     *
+     * @param reference to ConstIterator
+     * @return
+     *      true - if they are not the same
+     *      false - if they are the same
+    */
     bool operator!=(const ConstIterator& constIterator) const
     {
         return !(*this == constIterator);
