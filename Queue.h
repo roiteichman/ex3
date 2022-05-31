@@ -56,7 +56,7 @@ public:
     /*
     * Operator =
     *
-    * @param
+    * @param queue- the queue to be copied
     * @return
     *      reference to a new Queue
     */
