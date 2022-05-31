@@ -4,7 +4,7 @@
 
 #ifndef EX3_NODE_H
 #define EX3_NODE_H
-#define NULL 0
+#include <cstddef>
 template <class T>
 class Node
 {

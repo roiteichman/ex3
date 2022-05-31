@@ -33,7 +33,8 @@ public:
             }
         }
         catch (...){
-            delete this;
+            while(!isEmpty())
+                popFront();
             throw;
         }
     }
@@ -51,16 +52,21 @@ public:
             }
         }
         catch (...){
-            delete queue1->m_first;
+            while(!queue1->isEmpty())
+                queue1->popFront();
             throw;
         }
-        delete this->m_first;
+        while (!isEmpty())
+        {
+            this->popFront();
+        }
         this->m_first = queue1->m_first;
         this->m_counter = queue1->m_counter;
         this->m_last = queue1->m_last;
+        queue1->m_counter = 0;
+        delete queue1;
         return *this;
     }
-
 
 
     void pushBack(T element)
