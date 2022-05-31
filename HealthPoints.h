@@ -19,6 +19,30 @@ public:
     */
     HealthPoints(int hp = STARTING_HP);
 
+    /*
+     * d'tor of HealthPoints class
+     *
+     * @param
+     * @return
+    */
+    ~HealthPoints() = default;
+
+    /*
+     * overload operator =
+     *
+     * @param  another hp object
+     * @return
+     *      A reference to a copy of hp
+    */
+    HealthPoints& operator=(const HealthPoints&)= default;
+
+    /*
+     * copy C'tor of Queue class
+     *
+     * @param hp- to be copied
+     * @return
+     *      A copy instance of hp
+    */
     HealthPoints(const HealthPoints&) = default;
 
     /*
@@ -73,7 +97,7 @@ public:
     *
     * @param
     * @return
-    *      reference
+    *      reference to a new HealthPoints
     */
     HealthPoints& operator=(const HealthPoints&) = default;
     /*
