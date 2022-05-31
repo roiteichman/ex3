@@ -37,7 +37,7 @@ public:
     HealthPoints& operator=(const HealthPoints&)= default;
 
     /*
-     * copy C'tor of Queue class
+     * copy C'tor of HealthPoints class
      *
      * @param hp- to be copied
      * @return
@@ -83,23 +83,6 @@ public:
     */
     HealthPoints& operator-=(int hp);
 
-    /*
-    * copy c'tor
-    *
-    * @param
-    * @return
-    *      new HealthPoints
-    */
-
-
-    /*
-    * Operator =
-    *
-    * @param
-    * @return
-    *      reference to a new HealthPoints
-    */
-    HealthPoints& operator=(const HealthPoints&) = default;
     /*
      * Operator !=
      *
