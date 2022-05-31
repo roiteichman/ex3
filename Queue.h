@@ -200,19 +200,49 @@ public:
     class Iterator;
     class ConstIterator;
 
+    /*
+  * returns an iterator object the points to the begin of the queue
+  *
+  * @param
+  * @return
+  *      Iterator to begining of the queue
+  */
     Iterator begin()
     {
         return Iterator(this, this->m_first);
     }
+
+    /*
+  * returns an iterator object that points to one after the end of the queue
+  *
+  * @param
+  * @return
+  *      Iterator to one after the end of the queue
+  */
     Iterator end()
     {
         return Iterator(this, NULL);
     }
 
+    /*
+  * returns a const iterator object that points to the begin of the queue
+  *
+  * @param
+  * @return
+  *      constIterator to begining of the queue
+  */
     ConstIterator begin() const
     {
         return ConstIterator(this, this->m_first);
     }
+
+    /*
+  * returns a const iterator object that points to one after the end of the queue
+  *
+  * @param
+  * @return
+  *      constIterator to one after the end of the queue
+  */
     ConstIterator end() const
     {
         return ConstIterator(this, NULL);
