@@ -52,9 +52,7 @@ public:
             }
         }
         catch (...){
-            //while(!queue1->isEmpty())
             delete queue1;
-            //->popFront();
             throw;
         }
         while (!isEmpty())
