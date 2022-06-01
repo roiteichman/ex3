@@ -60,36 +60,6 @@ public:
     * @return
     *      reference to a new Queue
     */
-
-    /*
-    Queue& operator=(const Queue<T>& queue)
-    {
-        if (this == &queue){
-            return *this;
-        }
-        Queue<T>* queue1;// = new Queue<T>();
-
-        try {
-            for (const T &element: queue) {
-                queue1->pushBack(element);
-            }
-        }
-        catch (...){
-            delete queue1;
-            throw;
-        }
-        while (!isEmpty())
-        {
-            this->popFront();
-        }
-        this->m_first = queue1->m_first;
-        this->m_counter = queue1->m_counter;
-        this->m_last = queue1->m_last;
-        queue1->m_counter = 0;
-        delete queue1;
-        return *this;
-    }*/
-
     Queue& operator=(const Queue<T>& queue)
     {
         if (this == &queue){
