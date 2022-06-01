@@ -34,7 +34,7 @@ public:
      * @return
      *      A reference to a copy of hp
     */
-    HealthPoints& operator=(const HealthPoints&)= default;
+    HealthPoints& operator=(const HealthPoints&) = default;
 
     /*
      * copy C'tor of HealthPoints class
@@ -43,7 +43,7 @@ public:
      * @return
      *      A copy instance of hp
     */
-    HealthPoints(const HealthPoints&) = default;
+    HealthPoints (const HealthPoints&) = default;
 
     /*
      * Operator + increase the argument passed to the amount of hp the player had
